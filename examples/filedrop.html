@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  <meta charset="utf-8" />
+
+  <title>Filedrop</title>
+
+  <style>
+    html, body {
+      height: 100%;
+    }
+    body.over {
+      background: red;
+    }
+  </style>
+
+</head>
+<body>
+
+  Try dragging a file into this window
+
+  <ul class="files"></ul>
+
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+  <script type="text/javascript" src="../build/jquery.dropload.min.js"></script>
+  <script>
+
+    $('body').filedrop({
+      dragover : function() {
+        $(this).addClass('over');
+      },
+      dragleave : function() {
+        $(this).removeClass('over');
+      },
+      drop : function() {
+        $(this).removeClass('over');
+      }, 
+      files: function(files) {
+          
+        $.each(files, function(i, file) {
+          console.log(file);
+          $('.files').append('<li>' + file.name + ' (size: ' + file.size + ' type: ' + file.type + ')</li>');
+        });
+
+      }
+    });
+      
+  </script>
+
+</body>
+</html>

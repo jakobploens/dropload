@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  <meta charset="utf-8" />
+
+  <title>Dropload</title>
+
+  <style>
+    html, body {
+      height: 100%;
+    }
+    .dropload {
+      position: relative;
+      border: 2px dashed rgba(0,0,0, .15);
+      border-radius: .2em;
+      transition: border-color .3s;
+      margin: 3rem;
+      text-align: center;
+      padding: 5rem;
+    }
+    .dropload:hover,
+    .dropload.over,
+    .dropload:focus {
+      border-color: rgba(0,0,0, .25);
+    }
+    .dropload-text {
+      display: none;
+    }
+    .dropload.is-active [type=file] {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      opacity: 0;
+      cursor: pointer;
+    }
+    .dropload.is-active [type=submit] {
+      display: none;
+    }
+    .dropload.is-active .dropload-text {
+      display: block;
+    }
+
+  </style>
+
+</head>
+<body>
+
+  <form class="dropload" action="/fakeapi" method="post" enctype="multipart/form-data">
+   
+    <input type="file" name="file" multiple>
+    <input type="submit" value="Upload">
+     
+    <p class="dropload-text">
+      Drop files here or click to upload
+    </p>
+   
+  </form> 
+
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+  <script type="text/javascript" src="../build/jquery.dropload.min.js"></script>
+  <script>
+    if($.support.dropload) {
+      $('.dropload').addClass('is-active').dropload({
+        progress : function(progress) {
+          // update your progress bar here
+        },
+        complete : function(files) {
+          alert('fake uploaded to the void');
+        }
+      });
+    }       
+  </script>
+
+</body>
+</html>
